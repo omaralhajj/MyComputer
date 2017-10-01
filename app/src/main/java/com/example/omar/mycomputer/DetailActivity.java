@@ -22,21 +22,23 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
+        //UI Elements
         btnCancel = (Button)findViewById(R.id.btnCancel);
         btnEdit = (Button)findViewById(R.id.btnEdit);
 
         /***
          * Getting intent from MainActivity and checking if its empty or not.
          * If not empty, SetComputerInfo is called, which sets the TextViews
-         * to display whatever data input from earlier in EditActivity
-         * Doing this onCreate() means we don't need to override onSavedInstanceState,
-         * since the function will get called anyway after a change in orientation
-         * and the UI will be updated accordingly.
+         * to display whatever data input from earlier in EditActivity.
          */
         Intent intentData = getIntent();
         computerInfo = intentData.getExtras();
         if(computerInfo != null) {
             SetComputerInfo();
+        }
+
+        if (savedInstanceState != null) {
+            computerInfo = savedInstanceState.getBundle("computerInfo");
         }
 
         btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -54,9 +56,22 @@ public class DetailActivity extends AppCompatActivity {
         });
     }
 
+    /***
+     * Opens edit activity, and if relevant, also sends computer info to edit activity
+     */
     public void OpenEditActivity()
     {
         Intent i = new Intent(this, EditActivity.class);
+
+        if (computerInfo != null) {
+            String name = (String) computerInfo.get("name");
+            Boolean laptop = (Boolean) computerInfo.get("laptop");
+            int memory = (int) computerInfo.get("memory");
+            i.putExtra("name", name);
+            i.putExtra("laptop", laptop);
+            i.putExtra("memory", memory);
+        }
+
         startActivityForResult(i, MainActivity.GET_EDIT_DATA);
     }
 
@@ -80,16 +95,23 @@ public class DetailActivity extends AppCompatActivity {
 
         txtModel.setText(name);
         txtMemory.setText(String.valueOf(memory));
+        txtMemory.append(" GB");
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        //Simply sending the data back from edit activity to main
+        //Simply passes the data back from edit activity to main activity
         if(requestCode == MainActivity.GET_EDIT_DATA && resultCode == RESULT_OK)
         {
             setResult(RESULT_OK, data);
             finish();
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBundle("computerInfo", computerInfo);
     }
 }

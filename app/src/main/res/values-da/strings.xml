@@ -16,4 +16,6 @@
     <string name="string_no">Nej</string>
     <string name="string_yes">Ja</string>
     <string name="empty_textfield_warning">Tekstfelterne kan ikke være tomme</string>
+    <string name="empty_text_and_radiogroup">Tekstfelterne og radio knapperne kan ikke være tomme</string>
+    <string name="empty_radiogroup">Radio knapperne kan ikke være tomme</string>
 </resources>

@@ -23,7 +23,7 @@
         app:srcCompat="@mipmap/instructions" />
 
     <TextView
-        android:id="@+id/txbComputerName"
+        android:id="@+id/txtComputerName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="7dp"
@@ -39,13 +39,13 @@
         android:id="@+id/btnDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/btnDetails"
-        app:layout_constraintTop_toBottomOf="@+id/imgComputer"
-        android:layout_marginRight="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imgComputer" />
 
 
 

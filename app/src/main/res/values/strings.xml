@@ -15,4 +15,6 @@
     <string name="string_yes">Yes</string>
     <string name="string_no">No</string>
     <string name="empty_textfield_warning">Textfields cannot be left empty</string>
+    <string name="empty_text_and_radiogroup">Textfields and radiobuttons cannot be left empty</string>
+    <string name="empty_radiogroup">Radio buttons cannot be left empty</string>
 </resources>

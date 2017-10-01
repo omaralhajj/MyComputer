@@ -18,20 +18,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    /***
-     * NOTE: If app for some reason doesn't compile because of an invalid apk (slice_3.apk)
-     * then please switch instant run off in the settings. This will solve the issue and
-     * app will compile with no errors.
-     * Path: File->Settings->Build, Execution, Deployment->Instant Run->Untick "Enable Instant Run(..)"
-     */
-    private static final int REQUEST_IMAGE_CAPTURE = 101;
     public static final int GET_EDIT_DATA = 102;
+    /***
+     * NOTE TO REVIEWER: For some reason, the app wont install on the virtual android device because of an invalid apk (slice_3.apk) when "Instant Run"
+     * is enabled. To disable, go to File->Settings->Build, Execution, Deployment->Instant Run->Untick "Enable Instant Run(..)"
+     * Once disabled, the app will install and run with no problem.
+     */
 
+    private static final int REQUEST_IMAGE_CAPTURE = 101;
     ImageView imgButton;
+    TextView computerName;
     Button detailsButton;
     Bundle imageBundle;
     Bundle computerInfo;
@@ -41,14 +42,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //UI Elements
         imgButton = (ImageView) findViewById(R.id.imgComputer);
         detailsButton = (Button) findViewById(R.id.btnDetails);
+        computerName = (TextView) findViewById(R.id.txtComputerName);
 
         if (savedInstanceState != null) {
             //Loading bundles that hold data
             computerInfo = savedInstanceState.getBundle("computerInfo");
             imageBundle = savedInstanceState.getBundle("data");
+        }
+
+        //Checking if bundle is null so we dont get any crashes
+        if (imageBundle != null) {
             SetPicture();
+        }
+
+        //Checking if bundle is null so we dont get any crashes
+        if (computerInfo != null) {
+            SetName();
         }
 
         imgButton.setOnClickListener(new View.OnClickListener() {
@@ -107,6 +119,13 @@ public class MainActivity extends AppCompatActivity {
         imgButton.setImageBitmap(imageBitmap);
     }
 
+    //Set name of laptop if relevant
+    private void SetName() {
+        String name = computerInfo.getString("name");
+        computerName.setText(name);
+    }
+
+
     /***
      * This function simply starts a new activity the first time around with the end goal of the user
      * inputting his or hers computer information.
@@ -116,6 +135,7 @@ public class MainActivity extends AppCompatActivity {
     public void OpenDetailActivity()
     {
         Intent i = new Intent(getApplicationContext(), DetailActivity.class);
+
         if(computerInfo != null){
             String name = (String)computerInfo.get("name");
             Boolean laptop = (Boolean)computerInfo.get("laptop");
@@ -124,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
             i.putExtra("laptop", laptop);
             i.putExtra("memory", memory);
         }
+
         startActivityForResult(i, GET_EDIT_DATA);
     }
 
@@ -132,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        //Saving bundle that holds the image, and bundle that holds the computer info.
+        //Saving bundle that holds the image and bundle that holds the computer info.
         outState.putBundle("data", imageBundle);
         outState.putBundle("computerInfo", computerInfo);
     }
@@ -148,15 +169,11 @@ public class MainActivity extends AppCompatActivity {
             SetPicture();
         }
 
-
         if(requestCode == GET_EDIT_DATA && resultCode == RESULT_OK)
         {
             Bundle bundle = data.getExtras();
             computerInfo = bundle;
+            SetName();
         }
-
     }
-
-
-
 }
