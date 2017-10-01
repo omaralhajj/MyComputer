@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="btnDetails">Detaljer</string>
+    <string name="alertText">Vil du gerne tage et nyt billede?</string>
+    <string name="alertTitle">Tag billede</string>
+    <string name="noCameraToast">Intet kamera fundet</string>
+    <string name="app_name">MinComputer</string>
+    <string name="picture_notsaved_toast">Billedet blev ikke gemt</string>
+    <string name="title_activity_detail">Detaljer</string>
+    <string name="computer_model">Navn:</string>
+    <string name="computer_memory">Hukommelse:</string>
+    <string name="laptop_bool">Bærbar:</string>
+    <string name="add_details_instructions">Tryk på \'Redigér\' for at opdatere din PC information</string>
+    <string name="details_cancel_button">Annullér</string>
+    <string name="detail_button_edit">Redigér</string>
+    <string name="string_no">Nej</string>
+    <string name="string_yes">Ja</string>
+    <string name="empty_textfield_warning">Tekstfelterne kan ikke være tomme</string>
+</resources>

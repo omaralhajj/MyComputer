@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">MyComputer</string>
+    <string name="btnDetails">Details</string>
+    <string name="title_activity_detail">Details</string>
+    <string name="noCameraToast">No camera was found</string>
+    <string name="picture_notsaved_toast">Picture was not saved</string>
+    <string name="alertTitle">Take picture</string>
+    <string name="alertText">Do you want to take a new picture?</string>
+    <string name="computer_model">Name:</string>
+    <string name="computer_memory">Memory:</string>
+    <string name="laptop_bool">Laptop:</string>
+    <string name="add_details_instructions">Press \'Edit\' to update your computer information</string>
+    <string name="details_cancel_button">Cancel</string>
+    <string name="detail_button_edit">Edit</string>
+    <string name="string_yes">Yes</string>
+    <string name="string_no">No</string>
+    <string name="empty_textfield_warning">Textfields cannot be left empty</string>
+</resources>
