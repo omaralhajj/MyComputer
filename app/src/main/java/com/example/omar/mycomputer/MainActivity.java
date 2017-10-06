@@ -23,14 +23,12 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final int GET_EDIT_DATA = 102;
     /***
      * NOTE TO REVIEWER: For some reason, the app wont install on the virtual android device because of an invalid apk (slice_3.apk) when "Instant Run"
      * is enabled. To disable, go to File->Settings->Build, Execution, Deployment->Instant Run->Untick "Enable Instant Run(..)"
      * Once disabled, the app will install and run with no problem.
      */
 
-    private static final int REQUEST_IMAGE_CAPTURE = 101;
     ImageView imgButton;
     TextView computerName;
     Button detailsButton;
@@ -102,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                         if (takePicture.resolveActivity(getPackageManager()) != null)
-                            startActivityForResult(takePicture, REQUEST_IMAGE_CAPTURE);
+                            startActivityForResult(takePicture, DataKeys.REQUEST_IMAGE_CAPTURE);
                     }})
 
                 .setNegativeButton(android.R.string.no, null).show();
@@ -145,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
             i.putExtra("memory", memory);
         }
 
-        startActivityForResult(i, GET_EDIT_DATA);
+        startActivityForResult(i, DataKeys.GET_EDIT_DATA);
     }
 
 
@@ -161,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK)
+        if(requestCode == DataKeys.REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK)
         {
             Bundle extras = data.getExtras();
             imageBundle = extras;
@@ -169,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
             SetPicture();
         }
 
-        if(requestCode == GET_EDIT_DATA && resultCode == RESULT_OK)
+        if(requestCode == DataKeys.GET_EDIT_DATA && resultCode == RESULT_OK)
         {
             Bundle bundle = data.getExtras();
             computerInfo = bundle;

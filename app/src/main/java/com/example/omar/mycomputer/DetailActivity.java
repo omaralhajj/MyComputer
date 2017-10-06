@@ -72,7 +72,7 @@ public class DetailActivity extends AppCompatActivity {
             i.putExtra("memory", memory);
         }
 
-        startActivityForResult(i, MainActivity.GET_EDIT_DATA);
+        startActivityForResult(i, DataKeys.GET_EDIT_DATA);
     }
 
     /***
@@ -102,7 +102,7 @@ public class DetailActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         //Simply passes the data back from edit activity to main activity
-        if(requestCode == MainActivity.GET_EDIT_DATA && resultCode == RESULT_OK)
+        if(requestCode == DataKeys.GET_EDIT_DATA && resultCode == RESULT_OK)
         {
             setResult(RESULT_OK, data);
             finish();
