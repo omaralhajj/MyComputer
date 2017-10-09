@@ -1,12 +1,11 @@
 package com.example.omar.mycomputer;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -31,14 +30,15 @@ public class DetailActivity extends AppCompatActivity {
          * If not empty, SetComputerInfo is called, which sets the TextViews
          * to display whatever data input from earlier in EditActivity.
          */
+
+        if (savedInstanceState != null) {
+            computerInfo = savedInstanceState.getBundle("computerInfo");
+        }
+
         Intent intentData = getIntent();
         computerInfo = intentData.getExtras();
         if(computerInfo != null) {
             SetComputerInfo();
-        }
-
-        if (savedInstanceState != null) {
-            computerInfo = savedInstanceState.getBundle("computerInfo");
         }
 
         btnCancel.setOnClickListener(new View.OnClickListener() {

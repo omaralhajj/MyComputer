@@ -1,22 +1,15 @@
 package com.example.omar.mycomputer;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -147,7 +140,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -156,21 +148,19 @@ public class MainActivity extends AppCompatActivity {
         outState.putBundle("computerInfo", computerInfo);
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         if(requestCode == DataKeys.REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK)
         {
-            Bundle extras = data.getExtras();
-            imageBundle = extras;
-            //Picture taken, set it in the ImageView
-            SetPicture();
+            imageBundle = data.getExtras();
+            SetPicture(); //Picture taken, set it in the ImageView
         }
 
         if(requestCode == DataKeys.GET_EDIT_DATA && resultCode == RESULT_OK)
         {
-            Bundle bundle = data.getExtras();
-            computerInfo = bundle;
+            computerInfo = data.getExtras();
             SetName();
         }
     }

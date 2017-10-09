@@ -1,8 +1,8 @@
 package com.example.omar.mycomputer;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,15 +32,15 @@ public class EditActivity extends AppCompatActivity {
         Memory = (EditText) findViewById(R.id.editMemory);
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
 
+        if(savedInstanceState != null){
+            computerInfo = savedInstanceState.getBundle("computerInfo");
+        }
+
         //Receiving intent with data and checking if null
         Intent intentData = getIntent();
         computerInfo = intentData.getExtras();
         if (computerInfo != null) {
             SetComputerInfo();
-        }
-
-        if(savedInstanceState != null){
-            computerInfo = savedInstanceState.getBundle("computerInfo");
         }
 
         btnOk.setOnClickListener(new View.OnClickListener() {
@@ -88,13 +88,13 @@ public class EditActivity extends AppCompatActivity {
      */
     public void SetComputerInfo() {
         String name = computerInfo.getString("name");
-        Boolean laptop = computerInfo.getBoolean("laptop");
+        isLaptop = computerInfo.getBoolean("laptop");
         int memory = computerInfo.getInt("memory");
 
         Name.setText(name);
         Memory.setText(String.valueOf(memory));
 
-        if (laptop == true)
+        if (isLaptop == true)
             radioGroup.check(R.id.radioButtonYes);
         else
             radioGroup.check(R.id.radioButtonNo);
@@ -116,11 +116,17 @@ public class EditActivity extends AppCompatActivity {
         {
             if (radioGroup.getCheckedRadioButtonId() == -1) {  //If no radiobutton is ticked
                 Toast.makeText(this, getResources().getText(R.string.empty_text_and_radiogroup), Toast.LENGTH_SHORT).show(); //Alert user that field is empty and radiogroup is not ticked
-            } else
+            }
+
+            else
                 Toast.makeText(EditActivity.this, getResources().getText(R.string.empty_textfield_warning), Toast.LENGTH_SHORT).show(); //Alert user that fields are empty
-        } else if (radioGroup.getCheckedRadioButtonId() == -1) {
+        }
+
+        else if (radioGroup.getCheckedRadioButtonId() == -1) {
             Toast.makeText(this, getResources().getText(R.string.empty_radiogroup), Toast.LENGTH_SHORT).show(); //Alert user that radiogroup is not ticked
-        } else {
+        }
+
+        else {
             Intent data = new Intent();
             data.putExtra("laptop", isLaptop);
             data.putExtra("name", Name.getText().toString());
